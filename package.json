@@ -1,0 +1,49 @@
+{
+  "name": "imin-decathlon-stripe-integration-demos",
+  "version": "0.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "start-1": "node dist/1-customer-pay-decathlon/server.js",
+    "start-1:watch": "nodemon dist/1-customer-pay-decathlon/server.js",
+    "start-2": "node dist/2-transfer-payment-to-imin/transferPaymentToImin.js",
+    "start-3": "node dist/3-imin-forward-transfer-to-seller/webhook.js",
+    "start-3:watch": "nodemon dist/3-imin-forward-transfer-to-seller/webhook.js",
+    "start-4": "node dist/4-imin-reverse-transfer-listener/webhook.js",
+    "start-4:watch": "nodemon dist/4-imin-reverse-transfer-listener/webhook.js",
+    "copy-public-dir": "mkdir -p dist/1-customer-pay-decathlon/public && cp src/1-customer-pay-decathlon/public/* dist/1-customer-pay-decathlon/public",
+    "build": "npm run clean && npm run copy-public-dir && tsc",
+    "build:watch": "npm run clean && npm run copy-public-dir && tsc --watch",
+    "ts-check": "tsc --noEmit",
+    "test": "npm run lint && npm run prettier-format && npm run ts-check",
+    "clean": "rm -rf dist",
+    "lint": "eslint src --ext .ts",
+    "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write"
+  },
+  "author": "Luke Winship",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.7.9",
+    "@types/uuid": "^10.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.11.0",
+    "@typescript-eslint/parser": "^8.11.0",
+    "eslint": "^9.13.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "nodemon": "^3.1.7",
+    "prettier": "^3.3.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  },
+  "engines": {
+    "node": "18.18.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "stripe": "^17.2.1",
+    "uuid": "^10.0.0",
+    "zod": "^3.23.8"
+  }
+}
