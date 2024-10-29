@@ -37,14 +37,14 @@ async function main() {
 
   const charge = paymentIntent.latest_charge;
 
-  if (typeof charge.balance_transaction === 'string') {
-    throw new Error(
-      'Payment intent `.latest_charge.balance_transaction` must be expanded to a balance transaction object',
-    );
-  }
   if (!charge.balance_transaction) {
     throw new Error(
       'Payment intent `.latest_charge.balance_transaction` must not be null',
+    );
+  }
+  if (typeof charge.balance_transaction === 'string') {
+    throw new Error(
+      'Payment intent `.latest_charge.balance_transaction` must be expanded to a balance transaction object',
     );
   }
   const balanceTransaction = charge.balance_transaction;

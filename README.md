@@ -1,5 +1,9 @@
 # imin-decathlon-stripe-integration-demos
 
+Code used to proof-of-concept test the imin x Decathlon Stripe integration.
+
+The report of the proof-of-concept is here: https://docs.google.com/document/d/1BT4-zLkBjDfliqi4t1mqEqQ3djL0Rvjbv5u61LaCrFE/edit?tab=t.0#heading=h.r2qauhezxkwx.
+
 ## Set-up
 
 ```sh
