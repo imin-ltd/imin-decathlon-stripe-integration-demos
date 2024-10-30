@@ -11,7 +11,7 @@ export async function handleChargeEvent(event: Stripe.Event) {
   // charge.updated when the transfer is updated to include metadata
   if (
     // payment.created is not documented :/
-    (event.type as any) !== 'payment.created' &&
+    (event.type as string) !== 'payment.created' &&
     event.type !== 'charge.updated'
   ) {
     return;
@@ -51,6 +51,7 @@ export async function handleChargeEvent(event: Stripe.Event) {
   await transferAndSetDestinationChargeMetadata(
     iminStripe,
     charge.amount,
+    charge.currency,
     chargeId,
     metadata,
     metadata.sellerStripeAccountId,
