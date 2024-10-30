@@ -1,5 +1,10 @@
 {
   "compilerOptions": {
+    /* These options make the output more readable as JS */
+    "removeComments": false,
+    "pretty": true,
+    "preserveConstEnums": true,
+    "sourceMap": false, /* Generates corresponding '.map' file. */
     /* Basic Options */
     "target": "ES2018" /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017','ES2018' or 'ESNEXT'. */,
     "module": "ES2022" /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */,
@@ -7,7 +12,6 @@
       "DOM",
       "ES2022"
     ] /* Specify library files to be included in the compilation. */,
-    "sourceMap": true, /* Generates corresponding '.map' file. */
     "outDir": "./dist/", /* Redirect output structure to the directory. */
     "downlevelIteration": true, /* Provide full support for iterables in 'for-of', spread, and destructuring when targeting 'ES5' or 'ES3'. */
     /* Strict Type-Checking Options */
