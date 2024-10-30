@@ -1,6 +1,14 @@
+/**
+ * Start an express server for a user (imin) to connect their Stripe account to
+ * Decathlon.
+ *
+ * The OAuth token response will be logged to the console. You may want to make
+ * a note of it but it has no immediate use.
+ */
 import express from 'express';
 import Stripe from 'stripe';
 
+// Assert env vars
 if (!process.env.BASE_URL) {
   throw new Error(
     'Env var BASE_URL is required (e.g. BASE_URL=https://example.com)',
@@ -27,6 +35,7 @@ const PORT = process.env.PORT;
 
 const stripe = new Stripe(STRIPE_SECRET_KEY);
 
+// Setup app
 const app = express();
 
 app.get('/', (_req, res) => {
@@ -112,13 +121,14 @@ app.get('/stripe-connect/cb', async (req, res) => {
         }
       </style>
       <body>
-        <p>Stripe connect successful!</p>
+        <p>You are now successfully connected to Decathlon's stripe account!</p>
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKSCQsmPCaUEmzq5eEOJ6jW6mFP5_lNsA7Qg&s" alt="Basket of kittens" />
       </body>
     </html>
     `);
 });
 
+// Run app
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
