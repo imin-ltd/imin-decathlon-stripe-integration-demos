@@ -92,6 +92,6 @@ const exampleChargeUpdatedEvent = {
   pending_webhooks: 2,
   request: 'req_rjD0ijlWYhMUCi',
   type: 'charge.updated',
-} as any as Stripe.Event;
+} as unknown as Stripe.Event;
 
 handleChargeEvent(exampleChargeUpdatedEvent);

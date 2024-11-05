@@ -62,6 +62,6 @@ const exampleTransferReversedEvent = {
   pending_webhooks: 2,
   request: 'req_S3w4oYyKGv9sum',
   type: 'transfer.reversed',
-} as any as Stripe.Event;
+} as unknown as Stripe.Event;
 
 handleEvent(exampleTransferReversedEvent);

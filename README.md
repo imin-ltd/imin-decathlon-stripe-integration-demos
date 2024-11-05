@@ -15,13 +15,13 @@ npm install
 
 ```sh
 npm run build
-npm run start-1 # or start-2, start-3, start-4
+npm run start-1 # or start-2, etc
 ```
 
 ## Running (dev commands)
 
 - Build and rebuild on file change: `npm run build:watch`
-- Start and restart on build change: `npm run start-1:watch` (or start-2, start-3, start-4)
+- Start and restart on build change: `npm run start-1:watch` (or `start-webhook:watch`)
 
 ## Testing
 
