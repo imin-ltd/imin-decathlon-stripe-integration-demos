@@ -13,6 +13,8 @@ import { fileURLToPath } from 'url';
 import { v4 as uuidv4 } from 'uuid';
 import { SELLER_STRIPE_ACCOUNT_ID, decathlonStripe } from '../common/consts.js';
 
+const PORT = process.env.PORT ?? 4242;
+
 const app = express();
 
 const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
@@ -21,19 +23,18 @@ const publicDir = path.join(__dirname, 'public');
 console.log('publicDir:', publicDir);
 app.use(express.static(publicDir));
 
-const YOUR_DOMAIN = 'http://localhost:4242';
+const YOUR_DOMAIN = `http://localhost:${PORT}`;
 
 app.post('/create-checkout-session', async (_req, res) => {
   const session = await decathlonStripe.checkout.sessions.create({
     line_items: [
       {
-        // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
         price_data: {
           currency: 'gbp',
           product_data: {
             name: 'Football lesson',
           },
-          unit_amount: 1234,
+          unit_amount: 1000,
         },
         quantity: 1,
       },
@@ -58,4 +59,4 @@ app.post('/create-checkout-session', async (_req, res) => {
   res.redirect(303, session.url);
 });
 
-app.listen(4242, () => console.log('Running on port 4242'));
+app.listen(PORT, () => console.log(`Running on port ${PORT}`));

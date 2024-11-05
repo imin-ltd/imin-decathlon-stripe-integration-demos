@@ -7,12 +7,11 @@
 import 'dotenv/config';
 import express from 'express';
 import Stripe from 'stripe';
-import { handleEvent } from './handleEvent.js';
+import { handleChargeEvent as handleForwardChargeEvent } from '../3-imin-forward-transfer-to-seller/forwardTransfer.js';
+import { handleEvent as handleReverseTransferEvent } from '../4-imin-reverse-transfer-listener/handleEvent.js';
 
 const app = express();
 
-// Match the raw body to content type application/json
-// If you are using Express v4 - v4.16 you need to use body-parser, not express, to retrieve the request body
 app.post(
   '/webhook',
   express.json({ type: 'application/json' }),
@@ -21,7 +20,10 @@ app.post(
 
     console.log(`event (type=${event.type})`, JSON.stringify(event, null, 2));
 
-    await handleEvent(event);
+    // Each of these will early-return if the event is not relevant to them, so
+    // we can happily run them both.
+    await handleForwardChargeEvent(event);
+    await handleReverseTransferEvent(event);
 
     // Return a response to acknowledge receipt of the event
     response.json({ received: true });

@@ -34,15 +34,17 @@ export async function handleEvent(event: Stripe.Event) {
     typeof transfer.source_transaction === 'string'
       ? transfer.source_transaction
       : transfer.source_transaction.id;
-  if (transfer.amount_reversed !== transfer.amount) {
-    // TODO(later)
-    throw new Error('This is a partial refund, which we do not yet support');
-  }
+  const isPartialRefund = transfer.amount_reversed !== transfer.amount;
+  // if (transfer.amount_reversed !== transfer.amount) {
+  //   // TODO(later)
+  //   throw new Error('This is a partial refund, which we do not yet support');
+  // }
   /* TODO(later) we may want to do some checks here to confirm that this is a
   transfer whose reversal should lead to a charge refund e.g. retrieve the order
   from the booking db and check that it is a Decathlon order, etc */
   const refund = await iminStripe.refunds.create({
     charge: sourceChargeId,
+    ...(isPartialRefund ? { amount: transfer.amount_reversed } : {}),
   });
-  console.log('Created refund', refund);
+  console.log('Created refund:', refund);
 }
