@@ -11,7 +11,11 @@ import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { v4 as uuidv4 } from 'uuid';
-import { SELLER_STRIPE_ACCOUNT_ID, decathlonStripe } from '../common/consts.js';
+import {
+  DECATHLON_STRIPE_ACCOUNT_ID,
+  SELLER_STRIPE_ACCOUNT_ID,
+  iminStripe,
+} from '../../common/consts.js';
 
 const PORT = process.env.PORT ?? 4242;
 
@@ -26,7 +30,7 @@ app.use(express.static(publicDir));
 const YOUR_DOMAIN = `http://localhost:${PORT}`;
 
 app.post('/create-checkout-session', async (_req, res) => {
-  const session = await decathlonStripe.checkout.sessions.create({
+  const session = await iminStripe.checkout.sessions.create({
     line_items: [
       {
         price_data: {
@@ -49,6 +53,7 @@ app.post('/create-checkout-session', async (_req, res) => {
         // isDecathlon: true,
         // isTransferModel: true,
       },
+      on_behalf_of: DECATHLON_STRIPE_ACCOUNT_ID,
     },
   });
 

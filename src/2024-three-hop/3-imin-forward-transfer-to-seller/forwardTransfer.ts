@@ -3,8 +3,8 @@ import {
   DECATHLON_STRIPE_ACCOUNT_ID,
   IMIN_STRIPE_ACCOUNT_ID,
   iminStripe,
-} from '../common/consts.js';
-import { transferAndSetDestinationChargeMetadata } from '../common/transferAndSetDestinationChargeMetadata.js';
+} from '../../common/consts.js';
+import { transferAndSetDestinationChargeMetadata } from '../../common/transferAndSetDestinationChargeMetadata.js';
 
 export async function handleChargeEvent(event: Stripe.Event) {
   // payment.created when the transfer is sent in the first place.

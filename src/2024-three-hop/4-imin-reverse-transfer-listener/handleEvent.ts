@@ -1,5 +1,5 @@
 import Stripe from 'stripe';
-import { IMIN_STRIPE_ACCOUNT_ID, iminStripe } from '../common/consts.js';
+import { IMIN_STRIPE_ACCOUNT_ID, iminStripe } from '../../common/consts.js';
 
 export async function handleEvent(event: Stripe.Event) {
   if (event.type !== 'transfer.reversed') {
